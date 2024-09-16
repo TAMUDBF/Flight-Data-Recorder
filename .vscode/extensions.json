@@ -7,4 +7,5 @@
     "unwantedRecommendations": [
         "ms-vscode.cpptools-extension-pack"
     ]
+    // test
 }
