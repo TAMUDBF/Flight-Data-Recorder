@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"name": "Pitot Tube",
+			"path": "../../../../Documents/PlatformIO/Projects/Pitot Tube"
+		},
+		{
+			"name": "pitot",
+			"path": "../../pitot"
+		}
+	],
+	"settings": {}
+}
