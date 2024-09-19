@@ -6,6 +6,13 @@
 #include <Adafruit_NeoPixel.h>
 #include <sbus.h>
 
+#include <Logging.h>
+#include <Sensors.h>
+#include <Servos.h>
+#include <LEDManager.h>
+#include <Battery.h>
+#include <config.h>
+
 //Output Variables
 String utcTime = "";
 float acceleration[4];
