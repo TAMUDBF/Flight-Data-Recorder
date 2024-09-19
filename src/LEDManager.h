@@ -2,6 +2,6 @@
 #define LEDMANAGER_H
 
 void setupLED();
-void updateLED();
+void updateLED(Color color);
 
 #endif

@@ -2,9 +2,11 @@
 #include <config.h>
 
 void setupLED() {
-    // Turn white once setup
+    pixels.begin();
+    updateLED(WHITE);
 }
 
-void updateLED(Color) {
-    // use Color parameter to change color
+void updateLED(Color color) {
+    pixels.setPixelColor(0, pixels.Color(color.r, color.g, color.b));
+    pixels.show();
 }
