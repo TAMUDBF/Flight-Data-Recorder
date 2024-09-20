@@ -27,7 +27,7 @@ private:
     #endif
 public:
     void setup();
-    void csvLoggy();
+    void csvLog();
     void serialLog();
 };
 

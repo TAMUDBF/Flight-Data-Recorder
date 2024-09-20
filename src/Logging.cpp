@@ -29,7 +29,7 @@ void loggingHandler::setup() {
     csvFile.close(); 
 }
 
-void loggingHandler::csvLoggy() {
+void loggingHandler::csvLog() {
     digitalWrite(LED_BUILTIN, HIGH); // Builtin LED indicates that data is being written to the SD card
     csvFile.open(filename.c_str(), FILE_WRITE);
     csvFile.print(millis());

@@ -36,6 +36,6 @@ void loop() {
   pitotTube.read();
   SBus.read();
   battery.read();
-  logger.csvLoggy();
+  logger.csvLog();
   logger.serialLog();
 }
