@@ -104,7 +104,7 @@ const Color WHITE(255, 255, 255);
 struct Vector {
     float x, y, z;
     void serialLog(String label){
-        Serial.print(label + ": (" + x + ", " + y + ", " + z + "\n");
+        Serial.print(label + ": (" + x + ", " + y + ", " + z + ")\n");
     }
     void csvLog(){
         file.print("," + String(x) + "," + String(y) + "," + String(z));
@@ -114,7 +114,7 @@ struct Vector {
 struct Quaternion {
     float i, j, k, real;
     void serialLog(String label){
-        Serial.print(label + ": (" + i + ", " + j + ", " + k + ", " + real + "\n");
+        Serial.print(label + ": (" + i + ", " + j + ", " + k + ", " + real + ")\n");
     }
     void csvLog(){
         file.print("," + String(i) + "," + String(j) + "," + String(k) + "," + String(real));

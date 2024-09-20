@@ -22,18 +22,24 @@ void setup(void) {
   pinMode(LED_BUILTIN, OUTPUT); // Builtin LED
   Teensy3Clock.set(0);
 
-  //setupLED();
+  setupLED();
   setupIMU();
-  //setupGPS();
-  //setupPitot();
-  //setupSbus();
-  //setupBattery();
-  //setupSD();
-  //setupCSV();
+  setupGPS();
+  setupPitot();
+  setupSbus();
+  setupBattery();
+  setupSD();
+  setupCSV();
 }
 
 void loop() {
   smartDelay(10);
-  //logToCSV();
+  readIMU();
+  readGPS();
+  readPitot();
+  readSbus();
+  readBattery();
+  smartDelay(10);
+  logToCSV();
   logToSerial();
 }
