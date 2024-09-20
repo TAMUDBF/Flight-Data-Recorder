@@ -1,6 +1,10 @@
 #include <sbus.h>
 #include <config.h>
 
+bfs::SbusRx sbus_rx(&Serial6);
+bfs::SbusTx sbus_tx(&Serial6);
+bfs::SbusData recieverData;
+
 void setupSbus() {
     sbus_rx.Begin();
     sbus_tx.Begin();

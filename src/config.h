@@ -12,15 +12,15 @@
 #define BNO08X_CS 10
 #define BNO08X_INT 9
 #define BNO08X_RESET -1
-Adafruit_BNO08x bno08x(BNO08X_RESET);
-sh2_SensorValue_t sensorValue;
-sh2_SensorId_e imuSensors[] = {SH2_ACCELEROMETER,SH2_GYROSCOPE_CALIBRATED,SH2_LINEAR_ACCELERATION,SH2_GRAVITY,SH2_MAGNETIC_FIELD_CALIBRATED, SH2_ROTATION_VECTOR};
+extern Adafruit_BNO08x bno08x;
+extern sh2_SensorValue_t sensorValue;
+extern sh2_SensorId_e imuSensors[];
 
 // GPS Initialization
 static const int RXPin = 15, TXPin = 14;
 static const uint32_t GPSBaud = 38400;
-TinyGPSPlus gps;
-SoftwareSerial ss(RXPin, TXPin);
+extern TinyGPSPlus gps;
+extern SoftwareSerial ss;
 
 // SBUS Initialization
 #define AILERON_CH 0
@@ -29,9 +29,9 @@ SoftwareSerial ss(RXPin, TXPin);
 #define RUDDER_CH 4
 #define AUX_CH 5
 #define LOG_CH 6
-bfs::SbusRx sbus_rx(&Serial6);
-bfs::SbusTx sbus_tx(&Serial6);
-bfs::SbusData recieverData;
+extern bfs::SbusRx sbus_rx;
+extern bfs::SbusTx sbus_tx;
+extern bfs::SbusData recieverData;
 
 // Battery Initialization
 #define BATTERY_ADC_PIN 27
@@ -42,11 +42,11 @@ bfs::SbusData recieverData;
 #endif
 #define PIN 23 // On Trinket or Gemma, suggest changing this to 1
 #define NUMPIXELS 1 
-Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+extern Adafruit_NeoPixel pixels;
 #define DELAYVAL 500 // Time (in milliseconds) to pause between pixels
 
 // SD Setup
-String filename = "default";
+extern String filename;
 #define SD_FAT_TYPE 3
 #ifndef SDCARD_SS_PIN
 const uint8_t SD_CS_PIN = SS;
@@ -72,8 +72,8 @@ File32 file;
 SdExFat sd;
 ExFile file;
 #elif SD_FAT_TYPE == 3
-SdFs sd;
-FsFile file;
+extern SdFs sd;
+extern FsFile file;
 #else  // SD_FAT_TYPE
 #error Invalid SD_FAT_TYPE
 #endif  // SD_FAT_TYPE
@@ -169,6 +169,6 @@ struct Data {
 };
 
 
-Data data;
+extern Data data;
 
 #endif

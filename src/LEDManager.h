@@ -1,7 +1,9 @@
 #ifndef LEDMANAGER_H
 #define LEDMANAGER_H
 
-void setupLED();
+#include <config.h>
+
 void updateLED(Color color);
+void setupLED();
 
 #endif

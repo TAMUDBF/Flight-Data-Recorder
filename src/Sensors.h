@@ -1,6 +1,9 @@
 #ifndef SENSORS_H
 #define SENSORS_H
 
+#include <Adafruit_BNO08x.h>
+#include <TinyGPSPlus.h>
+
 void setupIMU();
 void readIMU();
 void checkIMU();

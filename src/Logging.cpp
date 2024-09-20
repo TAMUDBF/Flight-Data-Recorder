@@ -2,6 +2,11 @@
 #include <LEDManager.h>
 #include <config.h>
 
+String filename = "default";
+SdFs sd;
+FsFile file;
+Data data;
+
 void setupSD() {
     if(!sd.begin(SD_CONFIG)){
         Serial.println("SD Card not found");

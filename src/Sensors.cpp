@@ -4,6 +4,13 @@
 #include <LEDManager.h>
 #include <config.h>
 
+Adafruit_BNO08x bno08x(BNO08X_RESET);
+sh2_SensorValue_t sensorValue;
+sh2_SensorId_e imuSensors[] = {SH2_ACCELEROMETER,SH2_GYROSCOPE_CALIBRATED,SH2_LINEAR_ACCELERATION,SH2_GRAVITY,SH2_MAGNETIC_FIELD_CALIBRATED, SH2_ROTATION_VECTOR};
+
+TinyGPSPlus gps;
+SoftwareSerial ss(RXPin, TXPin);
+
 void setupIMU() {
     if(!bno08x.begin_I2C()){
         while(!bno08x.begin_I2C()){
@@ -97,8 +104,4 @@ void setupPitot() {
 
 void readPitot() {
     
-}
-
-void checkGPS() {
-
 }
