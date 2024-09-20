@@ -6,39 +6,36 @@
 #include <Battery.h>
 #include <config.h>
 
-// Look at integrating this into GPS itself for more accurate delay?
-static void smartDelay(unsigned long ms)
-{
-  unsigned long start = millis();
-  do 
-  {
-    while (ss.available())
-      gps.encode(ss.read());
-  } while (millis() - start < ms);
-}
+Data data;
+imuHandler IMU;
+gpsHandler GPS;
+pitotHandler pitotTube;
+sbusHandler SBus;
+batteryHandler battery;
+ledHandler LED;
+loggingHandler logger;
 
 void setup(void) {
   Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT); // Builtin LED
   Teensy3Clock.set(0);
 
-  setupLED();
-  setupIMU();
-  setupGPS();
-  setupPitot();
-  setupSbus();
-  setupBattery();
-  setupSD();
-  setupCSV();
+  LED.setup();
+  IMU.setup();
+  GPS.setup();
+  pitotTube.setup();
+  SBus.setup();
+  battery.setup();
+  logger.setup();
 }
 
 void loop() {
-  smartDelay(10);
-  readIMU();
-  readGPS();
-  readPitot();
-  readSbus();
-  readBattery();
-  logToCSV();
-  logToSerial();
+  delay(10);
+  IMU.read();
+  GPS.read();
+  pitotTube.read();
+  SBus.read();
+  battery.read();
+  logger.csvLoggy();
+  logger.serialLog();
 }

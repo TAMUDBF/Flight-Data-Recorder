@@ -1,34 +1,32 @@
 #include <config.h>
 #include <LEDManager.h>
+#include <TinyGPSPlus.h>
+#include <Sensors.h>
 
-// IMU 
-Adafruit_BNO08x bno08x(BNO08X_RESET);
-sh2_SensorValue_t sensorValue;
-sh2_SensorId_e imuSensors[] = {SH2_ACCELEROMETER,SH2_GYROSCOPE_CALIBRATED,SH2_LINEAR_ACCELERATION,SH2_GRAVITY,SH2_MAGNETIC_FIELD_CALIBRATED, SH2_ROTATION_VECTOR};
+extern ledHandler LED;
+extern Data data;
 
-// GPS
-TinyGPSPlus gps;
-SoftwareSerial ss(RXPin, TXPin);
-
-void setupIMU() {
-    if(!bno08x.begin_I2C()){
-        while(!bno08x.begin_I2C()){
+void imuHandler::setup() {
+    bno08x = new Adafruit_BNO08x(BNO08X_RESET);
+    sh2_SensorId_e imuSensors[] = {SH2_ACCELEROMETER,SH2_GYROSCOPE_CALIBRATED,SH2_LINEAR_ACCELERATION,SH2_GRAVITY,SH2_MAGNETIC_FIELD_CALIBRATED, SH2_ROTATION_VECTOR};    if(!bno08x->begin_I2C()){
+        while(!bno08x->begin_I2C()){
             Serial.println("IMU not found");
-            updateLED(PURPLE);
+            LED.setColor(PURPLE);
             delay(100);
         }
     }
+
     for (sh2_SensorId_e sensorID : imuSensors){
-        while(!bno08x.enableReport(sensorID)){
+        while(!bno08x->enableReport(sensorID)){
             Serial.print("Could not initialize sensor" + String(sensorID));
-            updateLED(PURPLE);
+            LED.setColor(PURPLE);
             delay(100);
         }
     }
 }
 
-void readIMU() {
-    bno08x.getSensorEvent(&sensorValue);
+void imuHandler::read() {
+    bno08x->getSensorEvent(&sensorValue);
     switch (sensorValue.sensorId) {
         case SH2_ACCELEROMETER:
             data.acceleration.x = sensorValue.un.accelerometer.x;
@@ -66,17 +64,29 @@ void readIMU() {
     data.imuTimestamp = sensorValue.timestamp;
 }
 
-void checkIMU() {
+boolean imuHandler::working() {
     if((data.gravity.x+data.gravity.y+data.gravity.z)==0){
-        updateLED(PURPLE);
+        return false;
+    }
+    else {
+        return true;
     }
 }
 
-void setupGPS() {
-    ss.begin(GPSBaud);
+void gpsHandler::setup() {
+    ss = new SoftwareSerial(RXPin, TXPin);
+    ss->begin(GPSBaud);
 }
 
-void readGPS() {
+void gpsHandler::read() {
+    unsigned long start = millis();
+    while (ss->available()) {
+        gps.encode(ss->read());
+        if (millis() - start > 10) {  // Limit GPS processing to 10ms
+            break;
+        }
+    }
+
     data.utcTime.second = gps.time.second();
     data.utcTime.minute = gps.time.minute();
     data.utcTime.hour = gps.time.hour();
@@ -88,19 +98,16 @@ void readGPS() {
     data.hdop = gps.hdop.hdop();
 }
 
-void checkGPS() {
+boolean gpsHandler::working() {
     if(gps.satellites.value() < 4){
-        updateLED(BLUE);
+        return false;
     }
     else {
-        updateLED(GREEN);
+        return true;
     }
 }
 
-void setupPitot() {
-    // Pitot not currently implemented, WIP
-}
-
-void readPitot() {
-    
-}
+// Pitot is a WIP
+void pitotHandler::setup() {}
+void pitotHandler::read() {}
+boolean pitotHandler::working() {return false;}

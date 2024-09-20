@@ -1,18 +1,19 @@
 #include <sbus.h>
 #include <config.h>
+#include <Reciever.h>
 
-bfs::SbusRx sbus_rx(&Serial6);
-bfs::SbusTx sbus_tx(&Serial6);
-bfs::SbusData recieverData;
+extern Data data;
 
-void setupSbus() {
-    sbus_rx.Begin();
-    sbus_tx.Begin();
+void sbusHandler::setup() {
+    sbus_rx = new bfs::SbusRx(&Serial6);
+    sbus_tx = new bfs::SbusTx(&Serial6);
+    sbus_rx->Begin();
+    sbus_tx->Begin();
 }
 
-void readSbus() {
-    if (sbus_rx.Read()) {
-        recieverData = sbus_rx.data();
+void sbusHandler::read() {
+    if (sbus_rx->Read()) {
+        recieverData = sbus_rx->data();
         data.aileron.raw = recieverData.ch[AILERON_CH];
         data.elevator.raw = recieverData.ch[ELEVATOR_CH];
         data.rudder.raw = recieverData.ch[RUDDER_CH];
@@ -21,15 +22,15 @@ void readSbus() {
         data.logging.raw = recieverData.ch[LOG_CH];
     }
     /* Set the SBUS TX data to the received data */
-    sbus_tx.data(recieverData);
+    sbus_tx->data(recieverData);
     /* Write the data to the servos */
-    sbus_tx.Write();
+    sbus_tx->Write();
 }
 
-void checkSbus() {
+void sbusHandler::map() {
 
 }
 
-void mapSbus() {
+boolean sbusHandler::working() {
     
 }

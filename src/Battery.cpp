@@ -1,13 +1,16 @@
 #include <config.h>
+#include <Battery.h>
 
-void setupBattery() {
+extern Data data;
+
+void batteryHandler::setup() {
     pinMode(BATTERY_ADC_PIN, INPUT);
 }
 
-void readBattery() {
+void batteryHandler::read() {
     data.batteryVoltage.raw = analogRead(BATTERY_ADC_PIN);
 }
 
-void checkBattery() {
+boolean batteryHandler::working() {
 
 }
