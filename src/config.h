@@ -168,7 +168,6 @@ struct Data {
     //...etc. for all data collected
 };
 
-
 extern Data data;
 
 #endif

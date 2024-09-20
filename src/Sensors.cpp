@@ -1,13 +1,12 @@
-#include <Adafruit_BNO08x.h>
-#include <TinyGPSPlus.h>
-#include <SoftwareSerial.h>
-#include <LEDManager.h>
 #include <config.h>
+#include <LEDManager.h>
 
+// IMU 
 Adafruit_BNO08x bno08x(BNO08X_RESET);
 sh2_SensorValue_t sensorValue;
 sh2_SensorId_e imuSensors[] = {SH2_ACCELEROMETER,SH2_GYROSCOPE_CALIBRATED,SH2_LINEAR_ACCELERATION,SH2_GRAVITY,SH2_MAGNETIC_FIELD_CALIBRATED, SH2_ROTATION_VECTOR};
 
+// GPS
 TinyGPSPlus gps;
 SoftwareSerial ss(RXPin, TXPin);
 

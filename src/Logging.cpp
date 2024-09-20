@@ -1,6 +1,5 @@
-#include <SdFat.h>
-#include <LEDManager.h>
 #include <config.h>
+#include <LEDManager.h>
 
 String filename = "default";
 SdFs sd;

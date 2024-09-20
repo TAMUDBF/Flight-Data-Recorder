@@ -39,7 +39,6 @@ void loop() {
   readPitot();
   readSbus();
   readBattery();
-  smartDelay(10);
   logToCSV();
   logToSerial();
 }
