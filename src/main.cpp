@@ -30,7 +30,7 @@ void setup(void) {
 }
 
 void loop() {
-  delay(10);
+  delay(10); // read rate
   IMU.read();
   GPS.read();
   pitotTube.read();
