@@ -1,9 +1,7 @@
 #include <config.h>
-#include <LEDManager.h>
 #include <TinyGPSPlus.h>
 #include <Sensors.h>
 
-extern ledHandler LED;
 extern Data data;
 
 void imuHandler::setup() {
@@ -11,7 +9,6 @@ void imuHandler::setup() {
     sh2_SensorId_e imuSensors[] = {SH2_ACCELEROMETER,SH2_GYROSCOPE_CALIBRATED,SH2_LINEAR_ACCELERATION,SH2_GRAVITY,SH2_MAGNETIC_FIELD_CALIBRATED, SH2_ROTATION_VECTOR};    if(!bno08x->begin_I2C()){
         while(!bno08x->begin_I2C()){
             Serial.println("IMU not found");
-            LED.setColor(PURPLE);
             delay(100);
         }
     }
@@ -19,7 +16,6 @@ void imuHandler::setup() {
     for (sh2_SensorId_e sensorID : imuSensors){
         while(!bno08x->enableReport(sensorID)){
             Serial.print("Could not initialize sensor" + String(sensorID));
-            LED.setColor(PURPLE);
             delay(100);
         }
     }
@@ -106,8 +102,3 @@ boolean gpsHandler::working() {
         return true;
     }
 }
-
-// Pitot is a WIP
-void pitotHandler::setup() {}
-void pitotHandler::read() {}
-boolean pitotHandler::working() {return false;}

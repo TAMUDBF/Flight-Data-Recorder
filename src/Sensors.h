@@ -29,13 +29,4 @@ public:
     boolean working();
 };
 
-// Pitot is a WIP
-class pitotHandler {
-private:
-public:
-    void setup();
-    void read();
-    boolean working();
-};
-
 #endif

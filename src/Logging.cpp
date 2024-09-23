@@ -1,8 +1,7 @@
-#include <LEDManager.h>
+#include <config.h>
 #include <Logging.h>
 #include <SdFat.h>
 
-extern ledHandler LED;
 extern Data data;
 String filename;
 
@@ -11,7 +10,6 @@ void loggingHandler::setup() {
     if(!sd.begin(SD_CONFIG)){
         Serial.println("SD Card not found");
         while(!sd.begin(SD_CONFIG)){
-            LED.setColor(YELLOW);
             delay(100);
         }
     }
@@ -46,12 +44,6 @@ void loggingHandler::csvLog() {
     csvFile.print("," + String(data.speed));
     csvFile.print("," + String(data.course));
     csvFile.print("," + String(data.hdop));
-    csvFile.print(data.throttle.csvLog());
-    csvFile.print(data.aileron.csvLog());
-    csvFile.print(data.elevator.csvLog());
-    csvFile.print(data.rudder.csvLog());
-    csvFile.print(data.batteryVoltage.csvLog());
-    csvFile.print(data.aux.csvLog());
     csvFile.print("\r");
     csvFile.close(); 
 }
