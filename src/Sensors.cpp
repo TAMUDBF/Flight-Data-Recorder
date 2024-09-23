@@ -18,7 +18,7 @@ void sensorHandler::setup() {
     }
 
     for (sh2_SensorId_e sensorID : imuSensors){
-        while(!bno08x->enableReport(sensorID)){
+        while(!bno08x->enableReport(sensorID, 100)){
             Serial.print("Could not initialize sensor" + String(sensorID));
             delay(100);
         }
@@ -67,7 +67,8 @@ void sensorHandler::read() {
             break;
     }
 
-    data.imuTimestamp = sensorValue.timestamp; // Indicates if IMU data is new
+    data.msTime = millis(); // Time in ms at which data was read
+    data.imuTimestamp = sensorValue.timestamp; // Indicates if IMU data is new/matches with GPS
 
     // Can only read GPS when new data is ready
     if (gps.time.isUpdated()){

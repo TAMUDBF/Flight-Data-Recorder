@@ -30,7 +30,7 @@ void loggingHandler::setup() {
 void loggingHandler::csvLog() {
     digitalWrite(LED_BUILTIN, HIGH); // Builtin LED indicates that data is being written to the SD card
     csvFile.open(filename.c_str(), FILE_WRITE);
-    csvFile.print(millis());
+    csvFile.print(data.msTime);
     csvFile.print(data.utcTime.csvLog());
     csvFile.print("," + String(data.imuTimestamp));
     csvFile.print("," + String(data.gpsTimestamp));
@@ -60,7 +60,7 @@ void loggingHandler::serialLog() {
     data.utcTime.serialLog("UTC Time");
     Serial.println("Latitude:" + String(data.latitude));
     Serial.println("Longitude:" + String(data.longitude));
-    Serial.println("ms Elapsed: " + millis());
+    Serial.println("ms Elapsed: " + String(data.msTime));
     Serial.println("IMU Timestamp: " + String(data.imuTimestamp));
     Serial.println("GPS Timestamp: " + String(data.gpsTimestamp));
 }

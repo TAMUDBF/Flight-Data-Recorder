@@ -33,18 +33,19 @@ struct Quaternion {
 struct Time {
     int second, minute, hour;
     void serialLog(String label){
-        Serial.print(label + ": " + second + ":" + minute + ":" + hour + "\n");
+        Serial.print(label + ": " + hour + ":" + minute + ":" + second + "\n");
     }
     String csvLog(){
-        return String("," + String(second) + ":" + String(minute) + ":" + String(hour) + "\n");
+        return String("," + String(hour) + ":" + String(minute) + ":" + String(second) + "\n");
     }
     String formatted() {
-        return String(second) + "." + String(minute) + "." + String(hour);
+        return String(hour) + "." + String(minute) + "." + String(second);
     }
 };
 
 // Initialize data structure
 struct Data {
+    unsigned long msTime;
     Time utcTime;
     unsigned long imuTimestamp;
     unsigned long gpsTimestamp;
