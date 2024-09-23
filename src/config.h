@@ -46,13 +46,14 @@ struct Time {
 // Initialize data structure
 struct Data {
     Time utcTime;
+    unsigned long imuTimestamp;
+    unsigned long gpsTimestamp;
     Vector acceleration;
     Vector angular_velocity;
     Vector linear_acceleration;
     Vector gravity;
     Vector magnet;
     Quaternion orientation;
-    unsigned long imuTimestamp;
     float latitude;
     float longitude;
     float altitude;
