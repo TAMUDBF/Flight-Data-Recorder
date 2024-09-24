@@ -36,7 +36,7 @@ struct Time {
         Serial.print(label + ": " + hour + ":" + minute + ":" + second + "\n");
     }
     String csvLog(){
-        return String("," + String(hour) + ":" + String(minute) + ":" + String(second) + "\n");
+        return String("," + String(hour) + ":" + String(minute) + ":" + String(second));
     }
     String formatted() {
         return String(hour) + "." + String(minute) + "." + String(second);

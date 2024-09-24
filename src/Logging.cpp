@@ -23,7 +23,7 @@ void loggingHandler::setup() {
     }
     csvFile.open(filename.c_str(), FILE_WRITE);
     csvFile.print(
-        F("time_ms,time_utc,imu_timestamp,gps_timestamp,acceleration_x,acceleration_y,acceleration_z,angular_velocity_x,angular_velocity_y,angular_velocity_z,linear_acceleration_x,linear_acceleration_y,linear_acceleration_z,gravity_x,gravity_y,gravity_z,orientation_i,orientation_j,orientation_k,orientation_real,longitude,latitude,altitude,speed,course,hdop\r\n"));
+        F("time_ms,time_utc,imu_timestamp,gps_timestamp,acceleration_x,acceleration_y,acceleration_z,angular_velocity_x,angular_velocity_y,angular_velocity_z,linear_acceleration_x,linear_acceleration_y,linear_acceleration_z,gravity_x,gravity_y,gravity_z,magnetometer_x,magnetometer_y,magnetometer_z,orientation_i,orientation_j,orientation_k,orientation_real,longitude,latitude,altitude,speed,course,hdop\r\n"));
     csvFile.close(); 
 }
 
@@ -40,8 +40,8 @@ void loggingHandler::csvLog() {
     csvFile.print(data.gravity.csvLog());
     csvFile.print(data.magnet.csvLog());
     csvFile.print(data.orientation.csvLog());
-    csvFile.print("," + String(data.latitude));
-    csvFile.print("," + String(data.longitude));
+    csvFile.print("," + String(data.latitude, 6));
+    csvFile.print("," + String(data.longitude, 6));
     csvFile.print("," + String(data.altitude));
     csvFile.print("," + String(data.speed));
     csvFile.print("," + String(data.course));
@@ -51,6 +51,7 @@ void loggingHandler::csvLog() {
 }
 
 void loggingHandler::serialLog() {
+    Serial.println();
     data.acceleration.serialLog("Acceleration");
     data.angular_velocity.serialLog("Angular Velocity");
     data.linear_acceleration.serialLog("Linear Acceleration");
@@ -58,8 +59,8 @@ void loggingHandler::serialLog() {
     data.magnet.serialLog("Magnetometer");
     data.orientation.serialLog("Orientation");
     data.utcTime.serialLog("UTC Time");
-    Serial.println("Latitude:" + String(data.latitude));
-    Serial.println("Longitude:" + String(data.longitude));
+    Serial.println("Latitude:" + String(data.latitude, 6));
+    Serial.println("Longitude:" + String(data.longitude, 6));
     Serial.println("ms Elapsed: " + String(data.msTime));
     Serial.println("IMU Timestamp: " + String(data.imuTimestamp));
     Serial.println("GPS Timestamp: " + String(data.gpsTimestamp));
