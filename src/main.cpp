@@ -26,16 +26,16 @@ void setup(void) {
   pitotTube.setup();
   SBus.setup();
   battery.setup();
-  logger.setup();
+  logger.setup(data);
 }
 
 void loop() {
   delay(10); // read rate
-  IMU.read();
-  GPS.read();
+  IMU.read(data);
+  GPS.read(data);
   pitotTube.read();
-  SBus.read();
-  battery.read();
-  logger.csvLog();
-  logger.serialLog();
+  SBus.read(data);
+  battery.read(data);
+  logger.csvLog(data);
+  logger.serialLog(data);
 }

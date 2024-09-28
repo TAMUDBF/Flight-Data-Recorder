@@ -6,7 +6,7 @@ private:
     #define BATTERY_ADC_PIN 27
 public:
     void setup();
-    void read();
+    void read(Data data);
     boolean working();
 };
 

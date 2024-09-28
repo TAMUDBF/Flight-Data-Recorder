@@ -2,7 +2,6 @@
 #include <config.h>
 #include <Reciever.h>
 
-extern Data data;
 
 void sbusHandler::setup() {
     sbus_rx = new bfs::SbusRx(&Serial6);
@@ -11,7 +10,7 @@ void sbusHandler::setup() {
     sbus_tx->Begin();
 }
 
-void sbusHandler::read() {
+void sbusHandler::read(Data data) {
     if (sbus_rx->Read()) {
         recieverData = sbus_rx->data();
         data.aileron.raw = recieverData.ch[AILERON_CH];

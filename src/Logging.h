@@ -26,9 +26,9 @@ private:
     #define SD_CONFIG SdSpiConfig(SD_CS_PIN, SHARED_SPI, SPI_CLOCK)
     #endif
 public:
-    void setup();
-    void csvLog();
-    void serialLog();
+    void setup(Data data);
+    void csvLog(Data data);
+    void serialLog(Data data);
 };
 
 #endif

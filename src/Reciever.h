@@ -14,7 +14,7 @@ private:
     bfs::SbusData recieverData;
 public:
     void setup();
-    void read();
+    void read(Data data);
     void map();
     boolean working();
 };

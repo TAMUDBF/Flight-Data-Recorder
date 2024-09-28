@@ -3,10 +3,9 @@
 #include <SdFat.h>
 
 extern ledHandler LED;
-extern Data data;
 String filename;
 
-void loggingHandler::setup() {
+void loggingHandler::setup(Data data) {
     // SD setup
     if(!sd.begin(SD_CONFIG)){
         Serial.println("SD Card not found");
@@ -29,7 +28,7 @@ void loggingHandler::setup() {
     csvFile.close(); 
 }
 
-void loggingHandler::csvLog() {
+void loggingHandler::csvLog(Data data) {
     digitalWrite(LED_BUILTIN, HIGH); // Builtin LED indicates that data is being written to the SD card
     csvFile.open(filename.c_str(), FILE_WRITE);
     csvFile.print(millis());
@@ -56,7 +55,7 @@ void loggingHandler::csvLog() {
     csvFile.close(); 
 }
 
-void loggingHandler::serialLog() {
+void loggingHandler::serialLog(Data data) {
     data.acceleration.serialLog("Acceleration");
     data.angular_velocity.serialLog("Angular Velocity");
     data.linear_acceleration.serialLog("Linear Acceleration");

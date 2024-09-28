@@ -13,8 +13,8 @@ private:
     sh2_SensorValue_t sensorValue;
 public:
     void setup();
-    void read();
-    boolean working();
+    void read(Data data);
+    boolean working(Data data);
 };
 
 class gpsHandler {
@@ -25,7 +25,7 @@ private:
     SoftwareSerial* ss;
 public:
     void setup();
-    void read();
+    void read(Data data);
     boolean working();
 };
 

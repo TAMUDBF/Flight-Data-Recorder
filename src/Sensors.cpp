@@ -4,7 +4,6 @@
 #include <Sensors.h>
 
 extern ledHandler LED;
-extern Data data;
 
 void imuHandler::setup() {
     bno08x = new Adafruit_BNO08x(BNO08X_RESET);
@@ -25,7 +24,7 @@ void imuHandler::setup() {
     }
 }
 
-void imuHandler::read() {
+void imuHandler::read(Data data) {
     bno08x->getSensorEvent(&sensorValue);
     switch (sensorValue.sensorId) {
         case SH2_ACCELEROMETER:
@@ -64,7 +63,7 @@ void imuHandler::read() {
     data.imuTimestamp = sensorValue.timestamp;
 }
 
-boolean imuHandler::working() {
+boolean imuHandler::working(Data data) {
     if((data.gravity.x+data.gravity.y+data.gravity.z)==0){
         return false;
     }
@@ -78,7 +77,7 @@ void gpsHandler::setup() {
     ss->begin(GPSBaud);
 }
 
-void gpsHandler::read() {
+void gpsHandler::read(Data data) {
     unsigned long start = millis();
     while (ss->available()) {
         gps.encode(ss->read());
