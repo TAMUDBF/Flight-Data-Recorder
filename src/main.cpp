@@ -21,12 +21,12 @@ void setup(void) {
   Teensy3Clock.set(0);
 
   LED.setup();
-  IMU.setup();
+  IMU.setup(LED);
   GPS.setup();
   pitotTube.setup();
   SBus.setup();
   battery.setup();
-  logger.setup();
+  logger.setup(LED);
 }
 
 void loop() {

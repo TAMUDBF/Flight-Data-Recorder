@@ -26,7 +26,7 @@ private:
     #define SD_CONFIG SdSpiConfig(SD_CS_PIN, SHARED_SPI, SPI_CLOCK)
     #endif
 public:
-    void setup();
+    void setup(ledHandler LED);
     void csvLog();
     void serialLog();
 };

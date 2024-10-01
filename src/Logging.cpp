@@ -2,11 +2,11 @@
 #include <Logging.h>
 #include <SdFat.h>
 
-extern ledHandler LED;
+
 extern Data data;
 String filename;
 
-void loggingHandler::setup() {
+void loggingHandler::setup(ledHandler LED) {
     // SD setup
     if(!sd.begin(SD_CONFIG)){
         Serial.println("SD Card not found");

@@ -12,7 +12,7 @@ private:
     Adafruit_BNO08x* bno08x;
     sh2_SensorValue_t sensorValue;
 public:
-    void setup();
+    void setup(ledHandler LED);
     void read();
     boolean working();
 };

@@ -3,10 +3,9 @@
 #include <TinyGPSPlus.h>
 #include <Sensors.h>
 
-extern ledHandler LED;
 extern Data data;
 
-void imuHandler::setup() {
+void imuHandler::setup(ledHandler LED) {
     bno08x = new Adafruit_BNO08x(BNO08X_RESET);
     sh2_SensorId_e imuSensors[] = {SH2_ACCELEROMETER,SH2_GYROSCOPE_CALIBRATED,SH2_LINEAR_ACCELERATION,SH2_GRAVITY,SH2_MAGNETIC_FIELD_CALIBRATED, SH2_ROTATION_VECTOR};    if(!bno08x->begin_I2C()){
         while(!bno08x->begin_I2C()){
